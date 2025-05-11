@@ -16,6 +16,7 @@
 #include <boost/url/rfc/uri_rule.hpp>
 #include <boost/url/rfc/uri_reference_rule.hpp>
 #include <boost/url/rfc/origin_form_rule.hpp>
+#include <boost/url/rfc/uri_optional_scheme_rule.hpp>
 #include <boost/url/grammar/parse.hpp>
 
 namespace boost {
@@ -58,6 +59,14 @@ parse_uri_reference(
 {
     return grammar::parse(
         s, uri_reference_rule);
+}
+
+system::result<url_view>
+parse_uri_optional_scheme(
+    core::string_view s)
+{
+    return grammar::parse(
+        s, uri_optional_scheme_rule);
 }
 
 } // urls

@@ -273,6 +273,53 @@ system::result<url_view>
 parse_uri_reference(
     core::string_view s);
 
+//------------------------------------------------
+
+/** Return a reference to a parsed URL string
+
+    This function parses a string according
+    to the grammar below and returns a view
+    referencing the passed string upon success,
+    else returns an error.
+    Ownership of the string is not transferred;
+    the caller is responsible for ensuring that
+    the lifetime of the character buffer extends
+    until the view is no longer being accessed.
+
+    @par Example
+    @code
+    system::result< url_view > = parse_uri_reference( "echo.example.com/?name=boost#demo" );
+    @endcode
+
+    @par BNF
+    @code
+    URI-optional-scheme = [ scheme "://" ] authority md-hier-part [ "?" query ] [ "#" fragment]
+
+    md-hier-part    = path-abempty
+                    / path-absolute
+                    / path-empty
+    @endcode
+
+    @throw std::length_error `s.size() > url_view::max_size`
+
+    @par Specification
+        rfc extension
+
+    @see
+        @ref parse_absolute_uri,
+        @ref parse_origin_form,
+        @ref parse_relative_ref,
+        @ref parse_uri,
+        @ref url_view.
+
+    @param s The string to parse
+    @return A view to the parsed URL
+*/
+BOOST_URL_DECL
+system::result<url_view>
+parse_uri_optional_scheme(
+    core::string_view s);
+
 } // url
 } // boost
 
