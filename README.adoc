@@ -256,11 +256,11 @@ _url_view_ provides the function
 [source,c++]
 ----
 for (auto seg: u.segments())
-std::cout << seg << "\n";
+    std::cout << seg << "\n";
 std::cout << "\n";
 
 for (auto param: u.params())
-std::cout << param.key << ": " << param.value << "\n";
+    std::cout << param.key << ": " << param.value << "\n";
 std::cout << "\n";
 ----
 
@@ -387,7 +387,7 @@ Another common use case is converting URL path segments into filesystem paths:
 ----
 boost::filesystem::path p;
 for (auto seg: u.segments())
-p.append(seg.begin(), seg.end());
+    p.append(seg.begin(), seg.end());
 std::cout << "path: " << p << "\n";
 ----
 
@@ -404,16 +404,16 @@ In many common use cases, no allocations are necessary at all, such as finding t
 [source,c++]
 ----
 auto match = [](
-std::vector<std::string> const& route,
-url_view u)
+    std::vector<std::string> const& route,
+        url_view u)
 {
-auto segs = u.segments();
-if (route.size() != segs.size())
-return false;
-return std::equal(
-route.begin(),
-route.end(),
-segs.begin());
+    auto segs = u.segments();
+    if (route.size() != segs.size())
+        return false;
+    return std::equal(
+    route.begin(),
+    route.end(),
+    segs.begin());
 };
 ----
 
@@ -422,10 +422,10 @@ This allows us to easily match files in the document root directory of a web ser
 [source,c++]
 ----
 std::vector<std::string> route =
-{"community", "reviews.html"};
+    {"community", "reviews.html"};
 if (match(route, u))
 {
-handle_route(route, u);
+    handle_route(route, u);
 }
 ----
 
@@ -441,7 +441,7 @@ This code calls `encoded_segments` to obtain the path segments as a container th
 segments_view segs = u.encoded_segments();
 for( auto v : segs )
 {
-std::cout << v << "\n";
+    std::cout << v << "\n";
 }
 ----
 
@@ -462,8 +462,8 @@ As with other library functions, `decode_view` permits accessing elements of com
 segments_view segs = u.encoded_segments();
 for( pct_string_view v : segs )
 {
-decode_view dv = *v;
-std::cout << dv << "\n";
+    decode_view dv = *v;
+    std::cout << dv << "\n";
 }
 ----
 
@@ -486,7 +486,7 @@ for( auto v : params_ref )
     decode_view dv(v.value);
     std::cout <<
         "key = " << dk <<
-        ", value = " << dv << "\n";
+            ", value = " << dv << "\n";
 }
 ----
 
